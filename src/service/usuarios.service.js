@@ -10,7 +10,7 @@ const solicitarUsuarioRegistrado = (correo, password) => {
         conexion.query('SELECT * FROM usuarios WHERE correo = ?', [correo], async (error, data) => {
             if (error) {
                 reject(new Error('Error al momento de realizar la solicitud'));
-                return; // Agregamos un return para evitar que el código continúe después del error
+                return; // Add return for prevent more errors
             }
 
             if (!data || data.length === 0) {
@@ -44,7 +44,7 @@ const actualizarDatosUsuario = (datos, id) => {
     return new Promise(async (resolve, reject) => {
         if ('password' in datos) {
             const password = await encryptar(datos.password);
-            datos.password = password; // Actualiza la contraseña encriptada en el objeto datos
+            datos.password = password; // update password encrypted in the object
         }
 
         conexion.query('UPDATE usuarios SET ? WHERE id = ?', [datos, id], (error, data) => {

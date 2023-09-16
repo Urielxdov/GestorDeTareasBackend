@@ -1,9 +1,9 @@
 "use strict";
 
-const { solicitarUsuarioRegistrado, registrarUsuario, actualizarDatosUsuario } = require('../service/usuarios.service');
-const jsonwebtoken = require('jsonwebtoken');
-const { secreto } = require('../../configuracion');
-const { verificarEmail, verificarPassword } = require('../ayudantes/verificacionDeDatos');
+const { solicitarUsuarioRegistrado, registrarUsuario, actualizarDatosUsuario } = require('../service/usuarios.service'); //Logic of the api
+const jsonwebtoken = require('jsonwebtoken'); //Import JWT
+const { secret } = require('../../configuracion'); //Import secret for JWT
+const { verificarEmail, verificarPassword } = require('../ayudantes/verificacionDeDatos'); //Validations of data
 
 const usuarioRegistrado = (req, res) => {
     const { correo, password } = req.body;
@@ -12,7 +12,7 @@ const usuarioRegistrado = (req, res) => {
         console.log('Hola3')
         solicitarUsuarioRegistrado(correo, password)
             .then((data) => {
-                const token = jsonwebtoken.sign({ id: data[0].id }, secreto, { //Use Json Web Token for more security
+                const token = jsonwebtoken.sign({ id: data[0].id }, secret, { //Use Json Web Token for more security
                     expiresIn: 60 * 60 * 24,
                     issuer: 'apiCRUDuriel050604',
                     audience: 'apiCRUDurielAudience'
@@ -32,15 +32,15 @@ const usuarioRegistrado = (req, res) => {
 const registrarUsuarios = (req, res) => {
     const { nombre, apellidos, correo, password } = req.body;
 
-    // Validación de datos
+    // data validations
     if (!(nombre && apellidos && verificarEmail(correo) && verificarPassword(password))) {
         return res.status(400).json({ mensaje: "Error en los datos, favor de verificar" });
     }
 
-    // Si los datos son válidos, proceder con el registro
+    // If dates is valid, send data the user
     registrarUsuario(nombre, apellidos, correo, password)
         .then(data => {
-            const token = jsonwebtoken.sign({ id: data[0].id }, secreto, {
+            const token = jsonwebtoken.sign({ id: data[0].id }, secret, {
                 expiresIn: 60 * 60 * 24,
                 issuer: 'apiCRUDuriel050604',
                 audience: 'apiCRUDurielAudience'
@@ -60,7 +60,7 @@ const actualizarUsuario = (req, res) => {
     }
 
     try {
-        const decodificacion = jsonwebtoken.verify(token, secreto, {
+        const decodificacion = jsonwebtoken.verify(token, secret, {
             issuer : 'apiCRUDuriel050604',
             audience : 'apiCRUDurielAudience'
         });

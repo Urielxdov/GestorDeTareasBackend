@@ -4,43 +4,42 @@
 const verificarEmail = (email) => {
     const expresionRegular =  /^[A-Za-z0-9_.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/; //Definimos la expresion regular
 
-    //Verificamos que sea un string y ademas no este vacio
+    //is email a String and not is empty?
     if(typeof email === 'string' && email !== '') {
-        return expresionRegular.test(email); // El correo cumplio con los criterios
+        return expresionRegular.test(email); // Validated
     }
-    return false; // El correo no cumplio con los criterios
+    return false; // The email doesn´t passed the validation
 }
 
 const verificarPassword = (password) => {
-    // Verificar si no es una cadena o es una cadena vacía
+    // Is the password a String or is minnor than 8?
     if (typeof password !== 'string' || password.length < 8) {
-        return false; // La contraseña no cumple con los criterios de seguridad
+        return false; // The password not meets the criterias of validation
     }
 
     // Verificar al menos una letra minúscula
     if (!/[a-z]/.test(password)) {
-        return false; // La contraseña no cumple con los criterios de seguridad
+        return false; // The password not meets the criterias of validation
     }
 
-    // Verificar al menos una letra mayúscula
+    // Validate what password contains at least one letter
     if (!/[A-Z]/.test(password)) {
-        return false; // La contraseña no cumple con los criterios de seguridad
+        return false; // The password not meets the criterias of validation
     }
 
-    // Verificar al menos un dígito
+    // Validate what password contains at least one number 
     if (!/[0-9]/.test(password)) {
-        return false; // La contraseña no cumple con los criterios de seguridad
+        return false; // The password not meets the criterias of validation
     }
 
-    // Verificar opcionalmente un carácter especial
+    // Validate what password contains at least one special character
     if (!/[!@#$%^&*()_+[\]{};':"\\|,.<>/?]+/.test(password)) {
-        return false; // La contraseña no cumple con los criterios de seguridad
+        return false; // The password not meets the criterias of validation
     }
 
-    return true; // La contraseña cumple con todos los criterios de seguridad
+    return true; // The password meets the criterias of validation
+
 }
-
-
 
 module.exports = { verificarEmail, verificarPassword };
 

@@ -1,16 +1,15 @@
 "use strict";
 
-//Declaracion de variables necesarias
-const express = require('express'); //Importamos el framework express.js
+//Declare necesary variables
+const express = require('express'); //Import Framework Express.js
 
 const cookieParser = require('cookie-parser');//Para indicar al servidor que recibira cookies 
 
-const v1Router = require('./Version1/routes/routesV1'); //Importamos los endpoints de la api
-const cors = require('cors'); //Para indicar las rutas permitidas para el acceso a la api
+const v1Router = require('./Version1/routes/routesV1'); //Import endpoints
+const cors = require('cors'); //for indicate the rutes allowed for acces to api
 
 
-
-const app = express();  //Objeto de express
+const app = express();  //Object of express
 const PORT = process.env.PORT || 3000;
 
 
