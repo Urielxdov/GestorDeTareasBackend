@@ -1,0 +1,22 @@
+POST http://localhost:3000/api/
+Content-Type: application/json
+
+{
+    "correo" : "Urieledgar878@gmail.com",
+    "password" : "Circulito1"
+}
+
+###
+
+POST  http://localhost:3000/api/
+Content-Type: application/json
+
+{
+    "nombre" : "prueba",
+    "apellidos" : "prueba",
+    "correo" : "prueba",
+    "password" : "prueba"
+}
+
+###
+GET http://localhost:3000/api/login-cookie
